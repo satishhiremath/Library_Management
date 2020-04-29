@@ -16,3 +16,8 @@ class BookNotPresentInLibrary(Exception):
 class BookAlreadyBorrowedByUser(Exception):
     """Raised when book is already borrowed by User"""
     pass
+
+
+class BookNotBorrowed(Exception):
+    """Raised when Book not in user borrowed list"""
+    pass

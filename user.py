@@ -34,3 +34,12 @@ class User(object):
         """Displays all list of borrowed books for a user"""
         print("User: ({}) borrowed books:{}".format(self.__name, self.__borrowed_list))
         return self.__borrowed_list
+
+    def return_book(self, book_name: str, library_obj):
+        """Returns borrowed book to library"""
+        if book_name in self.__borrowed_list:
+            self.__borrowed_list.remove(book_name)
+            library_obj.add_book(book_name)
+        else:
+            print("Book not in borrowed list")
+            raise BookNotBorrowed

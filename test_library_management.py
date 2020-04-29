@@ -76,6 +76,33 @@ class TestLibraryManagement(unittest.TestCase):
         user.request_book("book2", library_obj)
         self.assertRaises(BookAlreadyBorrowedByUser, user.request_book, "book2", library_obj)
 
+    def test_return_1_of_2_books(self):
+        """Tests scenario where 1 book is returned out of 2 borrowed books"""
+        books = ["book1", "book2", "book3", "book4"]
+        user = User("Satish")
+        library_obj = Library(books)
+        user.request_book("book1", library_obj)
+        user.request_book("book2", library_obj)
+        user.view_borrowed_list()
+        user.return_book("book1", library_obj)
+        desired_borrow_list = ["book2"]
+        library_obj.view_and_get_books()
+        self.assertEqual(user.view_borrowed_list(), desired_borrow_list)
+
+    def test_return_all_books(self):
+        """Tests scenario where all 2 books are returned from borrowed list"""
+        books = ["book1", "book2", "book3", "book4"]
+        user = User("Satish")
+        library_obj = Library(books)
+        user.request_book("book1", library_obj)
+        user.request_book("book2", library_obj)
+        user.view_borrowed_list()
+        user.return_book("book1", library_obj)
+        user.return_book("book2", library_obj)
+        desired_borrow_list = []
+        library_obj.view_and_get_books()
+        self.assertEqual(user.view_borrowed_list(), desired_borrow_list)
+
 
 if __name__ == "__main__":
     unittest.main()

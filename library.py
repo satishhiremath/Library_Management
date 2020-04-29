@@ -25,3 +25,7 @@ class Library(object):
         else:
             lend_successful = False
         return lend_successful
+
+    def add_book(self, book_name: str):
+        """Adds the returned book to library"""
+        self.__available_books_list.append(book_name)

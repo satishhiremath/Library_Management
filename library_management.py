@@ -15,6 +15,9 @@ def main():
     user.request_book("book1", library)
     library.view_and_get_books()
     user.view_borrowed_list()
+    user.return_book("book1", library)
+    user.view_borrowed_list()
+    library.view_and_get_books()
 
 
 if __name__ == "__main__":
