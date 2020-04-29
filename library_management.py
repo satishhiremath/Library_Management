@@ -12,7 +12,7 @@ class LibraryManagement(object):
     def __init__(self, name):
         self.__library_name = name
         self.__user_dict = {}
-        self.__library_obj = Library(["book1", "book2", "book3"])
+        self.__library_obj = Library(["BOOK1", "BOOK2", "BOOK3"])
 
     def display_library_menu(self):
         """Displays library menu"""
@@ -38,12 +38,12 @@ class LibraryManagement(object):
             if choice == 1:
                 self.__library_obj.view_and_get_books()
             elif choice == 2:
-                user_name = input("Enter user name: ")
+                user_name = input("Enter user name: ").upper()
                 if user_name not in self.__user_dict.keys():
                     self.__user_dict.update(self.create_user(user_name))
             elif choice == 3:
-                user_name = input("Enter user name: ")
-                book_name = input("Enter book to request: ")
+                user_name = input("Enter user name: ").upper()
+                book_name = input("Enter book to request: ").upper()
                 try:
                     self.__user_dict[user_name].request_book(book_name, self.__library_obj)
                 except KeyError:
@@ -56,8 +56,8 @@ class LibraryManagement(object):
                     print("Requested book is not present in Library")
 
             elif choice == 4:
-                user_name = input("Enter user name: ")
-                book_name = input("Enter book to return: ")
+                user_name = input("Enter user name: ").upper()
+                book_name = input("Enter book to return: ").upper()
                 try:
                     self.__user_dict[user_name].return_book(book_name, self.__library_obj)
                 except KeyError:
@@ -65,7 +65,7 @@ class LibraryManagement(object):
                 except BookNotBorrowed:
                     print("Book: {} not in borrowed list of user: {}".format(book_name, user_name))
             elif choice == 5:
-                user_name = input("Enter user name: ")
+                user_name = input("Enter user name: ").upper()
                 try:
                     self.__user_dict[user_name].view_borrowed_list()
                 except KeyError:
