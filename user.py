@@ -14,21 +14,18 @@ class User(object):
 
     def request_book(self, book_name: str, library_obj):
         """Adds requested book to user borrowed list"""
-        lend_status = library_obj.lend_book(book_name)
-
-        if lend_status and len(self.__borrowed_list) < 2\
+        if len(self.__borrowed_list) < 2\
                 and book_name not in self.__borrowed_list:
-            self.__borrowed_list.append(book_name)
-            print("Book: {} is borrowed by user: {}".format(book_name, self.__name))
+            lend_status = library_obj.lend_book(book_name)
+            if lend_status:
+                self.__borrowed_list.append(book_name)
+                print("Book: {} is borrowed by user: {}".format(book_name, self.__name))
+            else:
+                raise BookNotPresentInLibrary
         elif book_name in self.__borrowed_list:
-            print("Book: {} already borrowed by User: {}".format(book_name, self.__name))
             raise BookAlreadyBorrowedByUser
         elif len(self.__borrowed_list) >= 2:
-            print("Maximum borrow limit reached for user: {}".format(self.__name))
             raise MaximumBookBorrowLimit
-        else:
-            print("Requested book is not present in Library")
-            raise BookNotPresentInLibrary
 
     def view_borrowed_list(self) -> List:
         """Displays all list of borrowed books for a user"""
@@ -41,5 +38,4 @@ class User(object):
             self.__borrowed_list.remove(book_name)
             library_obj.add_book(book_name)
         else:
-            print("Book not in borrowed list")
             raise BookNotBorrowed

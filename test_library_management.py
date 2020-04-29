@@ -6,6 +6,7 @@ import unittest
 from library import Library
 from user import User
 from custom_exceptions import *
+from library_management import LibraryManagement
 
 
 class TestLibraryManagement(unittest.TestCase):
@@ -102,6 +103,14 @@ class TestLibraryManagement(unittest.TestCase):
         desired_borrow_list = []
         library_obj.view_and_get_books()
         self.assertEqual(user.view_borrowed_list(), desired_borrow_list)
+
+    def test_create_user(self):
+        """Tests create user function"""
+        user_name = "Satish"
+        library_manag_obj = LibraryManagement("xyz Library")
+        user_key_pair = library_manag_obj.create_user(user_name)
+        self.assertEqual(list(user_key_pair.keys())[0], user_name)
+        self.assertIsInstance(list(user_key_pair.values())[0], User)
 
 
 if __name__ == "__main__":
