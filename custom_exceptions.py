@@ -11,3 +11,8 @@ class MaximumBookBorrowLimit(Exception):
 class BookNotPresentInLibrary(Exception):
     """Raised when there are no books in library"""
     pass
+
+
+class BookAlreadyBorrowedByUser(Exception):
+    """Raised when book is already borrowed by User"""
+    pass

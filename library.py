@@ -14,13 +14,14 @@ class Library(object):
         if not len(self.__available_books_list):
             print("Library is Empty")
         else:
-            print("Books available in library:")
-            for book in self.__available_books_list:
-                print("----", book)
+            print("Books available in library:", self.__available_books_list)
         return self.__available_books_list
 
-
-if __name__ == "__main__":
-    books = ["book1", "book2", "book3", "book1"]
-    library = Library(books)
-    library.view_and_get_books()
+    def lend_book(self, requested_book: List) -> bool:
+        """Lends requested book to user"""
+        lend_successful = True
+        if requested_book in self.__available_books_list:
+            self.__available_books_list.remove(requested_book)
+        else:
+            lend_successful = False
+        return lend_successful

@@ -3,7 +3,8 @@ This class implements all the functionality related to User
 """
 from typing import List
 
-from custom_exceptions  import *
+from custom_exceptions import *
+
 
 class User(object):
     def __init__(self, user_name: str):
@@ -15,9 +16,13 @@ class User(object):
         """Adds requested book to user borrowed list"""
         lend_status = library_obj.lend_book(book_name)
 
-        if lend_status and len(self.__borrowed_list) < 2:
+        if lend_status and len(self.__borrowed_list) < 2\
+                and book_name not in self.__borrowed_list:
             self.__borrowed_list.append(book_name)
             print("Book: {} is borrowed by user: {}".format(book_name, self.__name))
+        elif book_name in self.__borrowed_list:
+            print("Book: {} already borrowed by User: {}".format(book_name, self.__name))
+            raise BookAlreadyBorrowedByUser
         elif len(self.__borrowed_list) >= 2:
             print("Maximum borrow limit reached for user: {}".format(self.__name))
             raise MaximumBookBorrowLimit
