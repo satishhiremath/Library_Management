@@ -1,0 +1,24 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    # v3.4.0
+    rev: 6e2418c5521b7d606e72914dced3253f9ace1205
+    hooks:
+      - id: check-json
+      - id: end-of-file-fixer
+        exclude: .specs|.bzl|.patch
+      - id: trailing-whitespace
+        exclude: .specs|.bzl|.patch|BUILD|.bazelrc
+  #- repo: https://github.com/pfs/black
+    # 21.4b1
+  #  rev: 1728bb441e6cc3ba5a5ce52ec62014bbfa435a82
+  #  hooks:
+  #    - id: black
+  - repo: https://github.com/jlebar/pre-commit-hooks
+    rev: 07a539b8db43298f124ace23c90b4b871911b8c4
+    hooks:
+      - id: bazel-buildifier
+        args: ["--mode=check"]
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: 1a0ed8d03ac002f74f1b33706d509dcb4425ab4d
+    hooks:
+      - id: gitlint
